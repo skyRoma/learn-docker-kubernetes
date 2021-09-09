@@ -40,15 +40,18 @@
 
 > Note: Upon execution of each instruction a temporary container is created, When execution is finished, this container snapshot is saved and passed to the next step as a base image.
 
-- `docker -t <docker_id>/<project_name>:<version> .` - i.e. `docker -t consrluk/redis:latest .` - tag the image that is being created. After that we can run `docker run conrsluk/redis` to create a container;
+- `docker build -t <docker_id>/<project_name>:<version> .` - i.e. `docker build -t consrluk/redis:latest .` - tag the image that is being created. After that we can run `docker run conrsluk/redis` to create a container;
 
-> Note: run redis-cli inside this container:
+> Note: run redis-cli inside this running container:
+>
+> 1. `docker ps` - get container id;
+> 2. `docker exec -it <container_id> sh`
+> 3. `redis-cli`
+> 4. `set <var_name> <value>`;
+> 5. `get <var_name>`;
 
-1. `docker ps` - get container id;
-2. `docker exec -it <container_id> sh`
-3. `redis-cli`
-4. `set <var_name> <value>`;
-5. `get <var_name>`;
-
-- `docker commit -c "CMD '<startup_command>'" <running_or_stopped_container_id>` - create an image based on container. `-c` add possibility to provide default startup command. So we can run container, make some changes in fly and then create an image with these changes. Emit container id;
+- `docker commit -c "CMD '<startup_command>'" <running_or_stopped_container_id>` - create an image based on container. `-c` add possibility to provide default startup command. So we can run container, make some changes in fly and then create an image with these changes. Emit image id. Then we can run a container using this id: `docker run <image_id>`;
+  <br/>
+  <br/>
+- `docker run -p <computer_port>:<container_port> <image_id(/image_name)>` - specify that incoming traffic to computer port should be redirected to container port;
   <br/>
