@@ -2,6 +2,8 @@
 
 - `docker run <container_name>` - emit the output to terminal;
   <br/>
+- `docker run -d <image_name>` - start new container in the background, so current terminal remains available for other commands;
+  <br/>
 - `docker run <container_name> <override command>` - emit the output to terminal, invoke and save startup command;
   <br/>
 - `docker ps` - emit currently running containers;
@@ -55,3 +57,13 @@
   <br/>
 - `docker run -p <computer_port>:<container_port> <image_id(/image_name)>` - specify that incoming traffic to computer port should be redirected to container port;
   <br/>
+  <br/>
+- `docker-compose up` - run all images inside docker-compose.yml;
+  <br/>
+- `docker-compose up --build` - rebuild end run all images inside docker-compose.yml;
+  <br/>
+- `docker-compose up -d` - start a group of containers in the background, so current terminal remains available for other commands;
+  <br/>
+- `docker-compose down` - stop all running containers at the same time;
+  <br/>
+- `docker-compose ps` - get status of running containers inside compose file. Should be checked in the working directory where `docker-compose.yml` is placed;
