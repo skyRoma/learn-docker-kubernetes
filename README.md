@@ -26,7 +26,7 @@
 - `docker logs <container_id>` - emit all the logs that have been emited from that container;
   <br/>
   <br/>
-- `docker stop <container_id>` - stop the container, make it possible for that container to make some additional work to successfully finish, i.e. unsubscribe from events. But if container won't stop in 10 sec, docker will automatically issue KILL command;
+- `docker stop <container_id>` - stop the container, make it possible for that container to make some additional work to successfully finish, e.g. unsubscribe from events. But if container won't stop in 10 sec, docker will automatically issue KILL command;
   <br/>
 - `docker kill <container_id>` - stop the container immediately, without any additional work;
   <br/>
@@ -42,7 +42,7 @@
 
 > Note: Upon execution of each instruction a temporary container is created, When execution is finished, this container snapshot is saved and passed to the next step as a base image.
 
-- `docker build -t <docker_id>/<project_name>:<version> .` - i.e. `docker build -t consrluk/redis:latest .` - tag the image that is being created. After that we can run `docker run conrsluk/redis` to create a container;
+- `docker build -t <docker_id>/<project_name>:<version> .` - e.g. `docker build -t consrluk/redis:latest .` - tag the image that is being created. After that we can run `docker run conrsluk/redis` to create a container;
 
 > Note: run redis-cli inside this running container:
 >
@@ -52,6 +52,8 @@
 > 4. `set <var_name> <value>`;
 > 5. `get <var_name>`;
 
+- `docker build -f <docker_file_name> .` - specify the file that is going to be used to build the image;
+  <br/>
 - `docker commit -c "CMD '<startup_command>'" <running_or_stopped_container_id>` - create an image based on container. `-c` add possibility to provide default startup command. So we can run container, make some changes in fly and then create an image with these changes. Emit image id. Then we can run a container using this id: `docker run <image_id>`;
   <br/>
   <br/>
@@ -67,3 +69,14 @@
 - `docker-compose down` - stop all running containers at the same time;
   <br/>
 - `docker-compose ps` - get status of running containers inside compose file. Should be checked in the working directory where `docker-compose.yml` is placed;
+  <br/>
+  <br/>
+- `docker run -v <not_overridden_folder_path_in_the_container> -v <local_folder_path>:<container_folder_path> <container_id>` - set up volumes or folders mapping to create a references from container files to local files, so that we can see changes without rebuilding the app, e.g. `docker run -v /app/node_modules -v pwd:/app 0c29a4e38d628`;
+
+> Note: Working with project in WSL2:
+>
+> 1. To open WSL2 operating system, type `wsl` in the terminal;
+> 2. In the WSL2 terminal switch to your root user directory by running `cd ~` ;
+> 3. Run `explorer.exe .` to open up a file browser within WSL2;
+> 4. Move the project directory into the file browser window;
+> 5. Your project path should now look like this: `/home/USER/frontend`;
