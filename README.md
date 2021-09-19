@@ -1,10 +1,10 @@
 # learn-docker-kubernetes
 
-- `docker run <container_name>` - emit the output to terminal;
+- `docker run <image_name>` - emit the output to terminal;
   <br/>
 - `docker run -d <image_name>` - start new container in the background, so current terminal remains available for other commands;
   <br/>
-- `docker run <container_name> <override command>` - emit the output to terminal, invoke and save startup command;
+- `docker run <image_name> <override_command>` - emit the output to terminal, invoke and save startup command;
   <br/>
 - `docker ps` - emit currently running containers;
   <br/>
@@ -12,9 +12,9 @@
   <br/>
 - `docker run = docker create + docker start`;
   <br/>
-- `docker create <container_name>` - make the file system ready, emit container id;
+- `docker create <image_name>` - make the file system ready, emit container id;
   <br/>
-- `docker create <container_name> <override command>` - make file system ready , emit container id, save startup command;
+- `docker create <image_name> <override_command>` - make file system ready , emit container id, save startup command;
   <br/>
 - `docker start -a <container_id>` - run the container, `-a` emit the output to terminal;
   <br/>
@@ -23,7 +23,7 @@
   <br/>
 - `docker system prune` - remove all stopped containers and related files;
   <br/>
-- `docker logs <container_id>` - emit all the logs that have been emited from that container;
+- `docker logs <container_id>` - emit all the logs that have been emitted from that container;
   <br/>
   <br/>
 - `docker stop <container_id>` - stop the container, make it possible for that container to make some additional work to successfully finish, e.g. unsubscribe from events. But if container won't stop in 10 sec, docker will automatically issue KILL command;
@@ -33,7 +33,7 @@
   <br/>
 - `docker exec -it <container_id> <command>` - execute additional command in a container, `it` add possibility to provide input inside of this container;
   <br/>
-- `docker exec -it <container_id> sh` - get the full terminal access inside the context of the running container;
+- `docker exec -it <container_id> sh` - get the full terminal access inside the context of the running container (sh should be installed inside the container);
   <br/>
 - `docker run -it <container_name> sh` - run `sh` immediately after container startup;
   <br/>
@@ -71,7 +71,7 @@
 - `docker-compose ps` - get status of running containers inside compose file. Should be checked in the working directory where `docker-compose.yml` is placed;
   <br/>
   <br/>
-- `docker run -v <not_overridden_folder_path_in_the_container> -v <local_folder_path>:<container_folder_path> <container_id>` - set up volumes or folders mapping to create a references from container files to local files, so that we can see changes without rebuilding the app, e.g. `docker run -v /app/node_modules -v pwd:/app 0c29a4e38d628`;
+- `docker run -v <not_overridden_folder_path_in_the_container> -v <local_folder_path>:<container_folder_path> <image_id(/image_name)>` - set up volumes or folders mapping to create a references from container files to local files, so that we can see changes without rebuilding the app, e.g. `docker run -p 3000:3000 -v /home/node/app/node_modules -v ~/learn-docker-kubernetes/frontend:/home/node/app conrsluk/frontend`;
 
 > Note: Working with project in WSL2:
 >
@@ -79,4 +79,4 @@
 > 2. In the WSL2 terminal switch to your root user directory by running `cd ~` ;
 > 3. Run `explorer.exe .` to open up a file browser within WSL2;
 > 4. Move the project directory into the file browser window;
-> 5. Your project path should now look like this: `/home/USER/frontend`;
+> 5. Your project path should now look like this: `/home/<USER>/learn-docker-kubernetes/frontend`;
