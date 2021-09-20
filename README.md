@@ -80,3 +80,6 @@
 > 3. Run `explorer.exe .` to open up a file browser within WSL2;
 > 4. Move the project directory into the file browser window;
 > 5. Your project path should now look like this: `/home/<USER>/learn-docker-kubernetes/frontend`;
+
+- `docker attach <container_id>` - Attach local standard input, output, and error streams to a primary process (with process id of 1) of running container. So using command `npm run test` this process is just `npm` and not `tests.js` or some secondary process that was started by `npm`;
+  <br/>
