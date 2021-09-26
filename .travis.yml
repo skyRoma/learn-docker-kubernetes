@@ -18,6 +18,6 @@ deploy:
   bucket_name: 'elasticbeanstalk-eu-west-1-102064755965'
   bucket_path: 'docker-frontend'
   on:
-    branch: master
+    branch: main
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
