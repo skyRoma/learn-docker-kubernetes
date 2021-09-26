@@ -9,4 +9,4 @@ RUN npm run build
 
 FROM nginx
 COPY --from=builder /home/node/app/build /usr/share/nginx/html
-# CMD is not needed since default nginx command will be used to start server
+# CMD is not needed since default nginx command will be used to start the server

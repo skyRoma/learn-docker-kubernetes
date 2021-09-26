@@ -1,4 +1,4 @@
-# learn-docker-kubernetes
+# learn-docker-kubernetes [![Build Status](https://app.travis-ci.com/skyRoma/learn-docker-kubernetes.svg?branch=main)](https://app.travis-ci.com/skyRoma/learn-docker-kubernetes)
 
 - `docker run <image_name>` - emit the output to terminal;
   <br/>
@@ -35,7 +35,7 @@
   <br/>
 - `docker exec -it <container_id> sh` - get the full terminal access inside the context of the running container (sh should be installed inside the container);
   <br/>
-- `docker run -it <container_name> sh` - run `sh` immediately after container startup;
+- `docker run -it <image_name> sh` - run `sh` immediately after container startup;
   <br/>
   <br/>
 - `docker build .` - create an image based on Dockerfile, emit image id;
@@ -67,6 +67,8 @@
 - `docker-compose up -d` - start a group of containers in the background, so current terminal remains available for other commands;
   <br/>
 - `docker-compose down` - stop all running containers at the same time;
+  <br/>
+- `docker-compose -f docker-compose-dev.yml up` - specify the file that is going to be used;
   <br/>
 - `docker-compose ps` - get status of running containers inside compose file. Should be checked in the working directory where `docker-compose.yml` is placed;
   <br/>
