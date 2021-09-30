@@ -13,11 +13,16 @@ script:
 deploy:
   provider: elasticbeanstalk
   region: 'eu-west-1'
+  # copied from EBS
   app: 'docker-frontend'
+  # copied from EBS
   env: 'Dockerfrontend-env'
+  # copied from S3
   bucket_name: 'elasticbeanstalk-eu-west-1-102064755965'
+  # this is a folder inside s3 bucket, it will be created automatically with the same name as the app
   bucket_path: 'docker-frontend'
   on:
     branch: main
+  # Stored inside Travis UI
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
