@@ -1,0 +1,11 @@
+# this file is related to frontend folder, should be placed in the root of the repo for correct frontend app deployment
+version: '3'
+
+services:
+  web:
+    build:
+      # path from the root
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
