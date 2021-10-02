@@ -15,9 +15,8 @@ after_success:
   - docker build -t conrsluk/complex-nginx ./complex/nginx
   - docker build -t conrsluk/complex-server ./complex/server
   - docker build -t conrsluk/complex-worker ./complex/worker
-  # log in to the docker CLI
-  # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
+  # log in to the docker CLI, env vars are stored inside Travis UI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # push images to the docker hub
   - docker push conrsluk/complex-client
   - docker push conrsluk/complex-nginx
