@@ -1,0 +1,25 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  # since this file should be located inside the root folder the relative path's are specified
+  - docker build -t conrsluk/complex-client -f complex/client/Dockerfile.dev ./complex/client
+
+script:
+  - docker run -e CI=true conrsluk/complex-client npm run test -- --coverage
+
+after_success:
+  - docker build -t conrsluk/complex-client ./complex/client
+  - docker build -t conrsluk/complex-nginx ./complex/nginx
+  - docker build -t conrsluk/complex-server ./complex/server
+  - docker build -t conrsluk/complex-worker ./complex/worker
+  # log in to the docker CLI
+  # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
+  # push images to the docker hub
+  - docker push conrsluk/complex-client
+  - docker push conrsluk/complex-nginx
+  - docker push conrsluk/complex-server
+  - docker push conrsluk/complex-worker
