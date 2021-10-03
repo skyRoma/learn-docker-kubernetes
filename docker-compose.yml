@@ -1,10 +1,12 @@
 version: '3'
 services:
   nginx:
+    # image from docker hub
     image: 'conrsluk/complex-nginx'
     ports:
       - '80:80'
   api:
+    # image from docker hub
     image: 'conrsluk/complex-server'
     environment:
       - REDIS_HOST=$REDIS_HOST
@@ -15,8 +17,10 @@ services:
       - PG_DB=$PG_DB
       - PG_PASSWORD=$PG_PASSWORD
   client:
+    # image from docker hub
     image: 'conrsluk/complex-client'
   worker:
+    # image from docker hub
     image: 'conrsluk/complex-worker'
     environment:
       - REDIS_HOST=$REDIS_HOST
