@@ -1,59 +1,23 @@
-# this file is related to complex folder, should be placed in the root of the repo for correct complex app deployment
 version: '3'
-
 services:
-  postgres:
-    image: 'postgres:latest'
-    environment:
-      - POSTGRES_PASSWORD=postgres
-  redis:
-    image: 'redis:latest'
   nginx:
-    restart: always
-    build:
-      # path from the root
-      context: ./complex/nginx
-      dockerfile: Dockerfile.dev
+    image: 'conrsluk/complex-nginx'
     ports:
-      - '3050:80'
+      - '80:80'
   api:
-    build:
-      # path from the root
-      context: ./complex/server
-      dockerfile: Dockerfile.dev
-    volumes:
-      - /home/node/app/node_modules
-        # path from the root
-      - ./complex/server:/home/node/app
+    image: 'conrsluk/complex-server'
     environment:
-        # host is equal to service name above
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - PG_USER=postgres
-        # host is equal to service name above
-      - PG_HOST=postgres
-      - PG_PORT=5432
-      - PG_DB=postgres
-      - PG_PASSWORD=postgres
+      - REDIS_HOST=$REDIS_HOST
+      - REDIS_PORT=$REDIS_PORT
+      - PG_HOST=$PG_HOST
+      - PG_PORT=$PG_PORT
+      - PG_USER=$PG_USER
+      - PG_DB=$PG_DB
+      - PG_PASSWORD=$PG_PASSWORD
   client:
-    build:
-      # path from the root
-      context: ./complex/client
-      dockerfile: Dockerfile.dev
-    volumes:
-      - /home/node/app/node_modules
-        # path from the root
-      - ./complex/client:/home/node/app
+    image: 'conrsluk/complex-client'
   worker:
-    build:
-      # path from the root
-      context: ./complex/worker
-      dockerfile: Dockerfile.dev
-    volumes:
-      - /home/node/app/node_modules
-        # path from the root
-      - ./complex/worker:/home/node/app
+    image: 'conrsluk/complex-worker'
     environment:
-        # host is equal to service name above
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+      - REDIS_HOST=$REDIS_HOST
+      - REDIS_PORT=$REDIS_PORT
